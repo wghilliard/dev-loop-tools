@@ -17,10 +17,8 @@ export class ChromiumReloadPlugin {
     }
 
     apply(compiler: webpack.Compiler) {
-        console.log('applying ChromiumReloadPlugin');
-        compiler.hooks.afterCompile.tapAsync(name, () => {
-            console.log('afterCompile: reload loop')
-            open("http://reload.extensions")
+        compiler.hooks.afterCompile.tap(name, () => {
+            open("http://reload.extensions", {app: {name: 'chrome'}})
         })
     }
 }
